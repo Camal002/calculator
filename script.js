@@ -63,12 +63,15 @@ function calculate(){
 
         let expr = display.value;
 
-        // log (обычный десятичный)
+        // --- КОНСТАНТЫ СНАЧАЛА ---
+        expr = expr.replace(/pi/g, `Math.PI`);
+        expr = expr.replace(/e/g, `Math.E`);
+
+        // --- LOG ---
         expr = expr.replace(/log\((.*?)\)/g,
             (_,x)=>`Math.log10(${x})`);
 
         // --- ТРИГОНОМЕТРИЯ (в градусах) ---
-
         expr = expr.replace(/sin\((.*?)\)/g,
             (_,x)=>`Math.sin(toRad(${x}))`);
 
@@ -79,7 +82,6 @@ function calculate(){
             (_,x)=>`Math.tan(toRad(${x}))`);
 
         // --- ОБРАТНЫЕ (в градусах) ---
-
         expr = expr.replace(/asin\((.*?)\)/g,
             (_,x)=>`toDeg(Math.asin(${x}))`);
 
@@ -89,7 +91,7 @@ function calculate(){
         expr = expr.replace(/atan\((.*?)\)/g,
             (_,x)=>`toDeg(Math.atan(${x}))`);
 
-        // гиперболические
+        // --- ГИПЕРБОЛИЧЕСКИЕ ---
         expr = expr.replace(/sinh\((.*?)\)/g,
             (_,x)=>`Math.sinh(${x})`);
 
@@ -98,10 +100,6 @@ function calculate(){
 
         expr = expr.replace(/tanh\((.*?)\)/g,
             (_,x)=>`Math.tanh(${x})`);
-
-        // константы
-        expr = expr.replace(/pi/g, `Math.PI`);
-        expr = expr.replace(/e/g, `Math.E`);
 
         let result = eval(expr);
 
