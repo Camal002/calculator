@@ -63,43 +63,46 @@ function calculate(){
 
         let expr = display.value;
 
-        // --- ТРИГОНОМЕТРИЯ (DEG MODE) ---
+        // log (обычный десятичный)
+        expr = expr.replace(/log\((.*?)\)/g,
+            (_,x)=>`Math.log10(${x})`);
+
+        // --- ТРИГОНОМЕТРИЯ (в градусах) ---
 
         expr = expr.replace(/sin\((.*?)\)/g,
-            (_,x)=>`math.sin(toRad(${x}))`);
+            (_,x)=>`Math.sin(toRad(${x}))`);
 
         expr = expr.replace(/cos\((.*?)\)/g,
-            (_,x)=>`math.cos(toRad(${x}))`);
+            (_,x)=>`Math.cos(toRad(${x}))`);
 
         expr = expr.replace(/tan\((.*?)\)/g,
-            (_,x)=>`math.tan(toRad(${x}))`);
+            (_,x)=>`Math.tan(toRad(${x}))`);
 
-        // обратные функции (вывод в градусах)
+        // --- ОБРАТНЫЕ (в градусах) ---
 
         expr = expr.replace(/asin\((.*?)\)/g,
-            (_,x)=>`toDeg(math.asin(${x}))`);
+            (_,x)=>`toDeg(Math.asin(${x}))`);
 
         expr = expr.replace(/acos\((.*?)\)/g,
-            (_,x)=>`toDeg(math.acos(${x}))`);
+            (_,x)=>`toDeg(Math.acos(${x}))`);
 
         expr = expr.replace(/atan\((.*?)\)/g,
-            (_,x)=>`toDeg(math.atan(${x}))`);
+            (_,x)=>`toDeg(Math.atan(${x}))`);
 
         // гиперболические
         expr = expr.replace(/sinh\((.*?)\)/g,
-            (_,x)=>`math.sinh(${x})`);
+            (_,x)=>`Math.sinh(${x})`);
 
         expr = expr.replace(/cosh\((.*?)\)/g,
-            (_,x)=>`math.cosh(${x})`);
+            (_,x)=>`Math.cosh(${x})`);
 
         expr = expr.replace(/tanh\((.*?)\)/g,
-            (_,x)=>`math.tanh(${x})`);
+            (_,x)=>`Math.tanh(${x})`);
 
         // константы
         expr = expr.replace(/pi/g, `Math.PI`);
         expr = expr.replace(/e/g, `Math.E`);
 
-        // вычисление
         let result = eval(expr);
 
         display.value = result;
