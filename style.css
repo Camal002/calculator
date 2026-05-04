@@ -26,8 +26,8 @@ body{
 
 .calculator{
     position:relative;
-    width: 88%;
-    max-width: 380px;
+    width: 80%;
+    max-width: 320px;
     padding:20px;
     border-radius:30px;
 
